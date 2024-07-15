@@ -1,42 +1,111 @@
+import { CiSearch } from "react-icons/ci";
+import AssignmentCenters from "./AssignmentCenters";
+import AssignmentCentersButtons from "./AssignmentCentersButtons";
+import { BsGripVertical } from "react-icons/bs";
+import { GiNotebook } from "react-icons/gi";
+import { IoEllipsisVertical } from "react-icons/io5";
+import { FaPlus } from "react-icons/fa6";
+import { VscTriangleDown } from "react-icons/vsc";
+
 export default function Assignments() {
-  return (
-    <div id="wd-assignments">
-      <input id="wd-search-assignment"
-             placeholder="Search for Assignments" />
-      <button id="wd-add-assignment-group">+ Group</button>
-      <button id="wd-add-assignment">+ Assignment</button>
-      <h3 id="wd-assignments-title">
-        ASSIGNMENTS 40% of Total <button>+</button>
-      </h3>
-      <ul id="wd-assignment-list">
-        <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link"
-            href="#/Kanbas/Courses/1234/Assignments/123">
-            A1 - ENV + HTML
-          </a><br></br>
-          <span id="wd-assignment-content">
-            Multiple Modules | <b>Not avalible until</b> May 6 at 12:00am | <br></br><b>Due</b> May 13 at 11:59pm | 100 pts
-          </span>
-        </li>
-        <li className="wd-assignment-list-item">
-        <a className="wd-assignment-link"
-            href="#/Kanbas/Courses/1234/Assignments/123">
-            A2 - CSS + BOOTSTRAP
-            </a><br></br>
-          <span id="wd-assignment-content">
-            Multiple Modules | <b>Not avalible until</b> May 13 at 12:00am | <br></br><b>Due</b> May 20 at 11:59pm | 100 pts
-          </span>
-        </li>
-        <li className="wd-assignment-list-item">
-        <a className="wd-assignment-link"
-            href="#/Kanbas/Courses/1234/Assignments/123">
-            A3 - JAVASCRIPT + REACT
-            </a><br></br>
-          <span id="wd-assignment-content">
-            Multiple Modules | <b>Not avalible until</b> May 20 at 12:00am | <br></br><b>Due</b> May 27 at 11:59pm | 100 pts
-          </span>
-        </li>
-      </ul>
-    </div>
-);
+    return (
+        <div id="wd-assignments">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+                <div className="input-group" style={{ width: '100px' }}>
+                    <span className="input-group-text">
+                        <CiSearch />
+                    </span>
+                    <input 
+                        type="text"
+                        id="wd-search-assignment"
+                        className="form-control"
+                        placeholder="Search..." />
+                </div>
+                <AssignmentCenters />
+            </div>
+
+            <ul id="wd-modules" className="list-group rounded-0">
+                <li className="wd-module list-group-item p-0 mb-5 fs-5" >
+                    <div className="wd-title p-3 ps-2 bg-light d-flex justify-content-between align-items-center">
+                        <div className="d-flex align-items-center">
+                            <BsGripVertical className="me-2 fs-3" />
+                            <VscTriangleDown className="me-2" />
+                            ASSIGNMENTS
+                        </div>
+                        <div className="d-flex align-items-center">
+                            <div className="border rounded-5 p-2 me-2">40% of Total</div>
+                            <FaPlus className="me-2" />
+                            <IoEllipsisVertical className="fs-4" />
+                        </div>
+                    </div>
+
+                    <ul className="wd-lessons list-group rounded-0">
+                        <li className="wd-lesson list-group-item p-3 ps-1" style={{ borderLeft: '5px solid green'}}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+                                    <BsGripVertical className="me-2" style={{ fontSize: '1.5rem' }} />
+                                    <GiNotebook style={{ color: 'green', marginRight: '12px', fontSize: '1.5rem' }} />
+                                    <div style={{ margin: '0 20px' }}>
+                                        <a className="wd-assignment-link"
+                                            href="#/Kanbas/Courses/1234/Assignments/123"
+                                            style={{ color: 'black', textDecoration: 'none', fontWeight: 'bold' }}>
+                                            A1
+                                        </a>
+                                        <br />
+                                        <span>
+                                            <span className="text-danger">Multiple Modules</span> | <b> Not available until</b> May 6 at 12:00am | <b> Due </b> May 13 at 11:59pm | 100 pts
+                                        </span>
+                                    </div>
+                                </div>
+                                <AssignmentCentersButtons />
+                            </div>
+                        </li>
+
+
+                        <li className="wd-lesson list-group-item p-3 ps-1" style={{ borderLeft: '5px solid green'}}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+                                    <BsGripVertical className="me-2" style={{ fontSize: '1.5rem' }} />
+                                    <GiNotebook style={{ color: 'green', marginRight: '12px', fontSize: '1.5rem' }} />
+                                    <div style={{ margin: '0 20px' }}>
+                                        <a className="wd-assignment-link"
+                                            href="#/Kanbas/Courses/1234/Assignments/123"
+                                            style={{ color: 'black', textDecoration: 'none', fontWeight: 'bold' }}>
+                                            A2
+                                        </a>
+                                        <br />
+                                        <span>
+                                            <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 13 at 12:00am | <b>Due</b> May 20 at 11:59pm | 100 pts
+                                        </span>
+                                    </div>
+                                </div>
+                                <AssignmentCentersButtons />
+                            </div>
+                        </li>
+
+                        <li className="wd-lesson list-group-item p-3 ps-1" style={{ borderLeft: '5px solid green'}}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+                                    <BsGripVertical className="me-2" style={{ fontSize: '1.5rem' }} />
+                                    <GiNotebook style={{ color: 'green', marginRight: '12px', fontSize: '1.5rem' }} />
+                                    <div style={{ margin: '0 20px' }}>
+                                        <a className="wd-assignment-link"
+                                            href="#/Kanbas/Courses/1234/Assignments/123"
+                                            style={{ color: 'black', textDecoration: 'none', fontWeight: 'bold' }}>
+                                            A3
+                                        </a>
+                                        <br />
+                                        <span>
+                                            <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 20 at 12:00am | <b>Due</b> May 27 at 11:59pm | 100 pts
+                                        </span>
+                                    </div>
+                                </div>
+                                <AssignmentCentersButtons />
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    );
 }
