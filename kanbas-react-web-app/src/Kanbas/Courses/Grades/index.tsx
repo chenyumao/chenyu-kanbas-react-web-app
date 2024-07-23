@@ -1,102 +1,117 @@
-import { AiOutlineSetting } from "react-icons/ai";
 import { TbFileImport } from "react-icons/tb";
-import { TbFileExport } from "react-icons/tb";
-import { CiSearch } from "react-icons/ci";
-import { IoIosArrowDown } from "react-icons/io";
+import { LiaFileImportSolid } from "react-icons/lia";
+import { IoIosArrowDown, IoIosSettings } from "react-icons/io";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiFilter } from "react-icons/ci";
-
+import * as db from "../../Database";
+import { useParams } from "react-router";
 export default function Grades() {
-    return (
-        <div>
-            <div className="d-flex justify-content-end mb-4">
-                <button className="btn btn-lg btn-light me-1 float-end border" >
-                    <TbFileImport className="position-relative me-1" />
-                    Import
-                </button>
-
-                <button className="btn btn-lg btn-light me-1 float-end border" >
-                    <TbFileExport className="position-relative me-1" />
-                    Export
-                    <IoIosArrowDown />
-                </button>
-
-                <button className="btn btn-lg btn-light me-1 float-end border" >
-                    <AiOutlineSetting />
-                </button>
+  const { cid } = useParams();
+  const currentEnrollments = db.enrollments.filter(enrollment => enrollment.course === cid);
+  const studentIds = currentEnrollments.map(enrollment => enrollment.user);
+  const students = db.users.filter(user => studentIds.includes(user._id));
+  const courseAssignments = db.assignments.filter(assignment => assignment.course === cid);
+  
+  return (
+    <div>
+      <div className="d-flex justify-content-end mt-3">
+        <button className="btn btn-lg btn-light ms-2">
+          <TbFileImport className="me-2 fs-5" />
+          Import
+        </button>
+        <button className="btn btn-lg btn-light ms-2">
+          <LiaFileImportSolid className="me-2 fs-5" />
+          Import
+        </button>
+        <button className="btn btn-lg btn-light ms-2">
+          <IoIosSettings className="me-2 fs-5" />
+        </button>
+      </div>
+      <div className="row mt-3">
+        <div className="col">
+          <div className="form-group">
+            <label htmlFor="wd-search-grade" className="form-label">
+              Student Name
+            </label>
+            <div className="input-group">
+              <span className="input-group-text bg-white border-end-0">
+                <HiMagnifyingGlass />
+              </span>
+              <input
+                type="search"
+                className="form-control border-start-0"
+                id="wd-search-grade"
+                placeholder="Search Student"
+              />
+              <IoIosArrowDown
+                className="position-absolute"
+                style={{ top: "50%", right: "20px", transform: "translateY(-50%)" }}
+                 />
             </div>
-
-            <div className="form-group row mb-4 ">
-                <div className="col-sm-6 d-flex flex-column justify-content-center">
-                    <label className="col-sm-6 col-form-label" style={{ fontWeight: 'bold' }}>Student Names</label>
-                    <div className="input-group col-sm-6" >
-                        <span className="input-group-text" style={{ backgroundColor: 'transparent' }}>
-                            <CiSearch />
-                        </span>
-                        <input className="form-control"
-                            placeholder="Search Students" />
-                        <span className="input-group-text" style={{ backgroundColor: 'transparent' }}>
-                            <IoIosArrowDown />
-                        </span>
-                    </div>
-                </div>
-                <div className="col-sm-6 d-flex flex-column justify-content-center">
-                    <label className="col-sm-6 col-form-label" style={{ fontWeight: 'bold' }}>Assignment Names</label>
-                    <div className="input-group col-sm-6" >
-                        <span className="input-group-text" style={{ backgroundColor: 'transparent' }}>
-                            <CiSearch />
-                        </span>
-                        <input className="form-control"
-                            placeholder="Search Assignments" />
-                        <span className="input-group-text" style={{ backgroundColor: 'transparent' }}>
-                            <IoIosArrowDown />
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="text-nowrap justify-content-end mb-4">
-                <button className="btn btn-lg btn-light me-1 border" >
-                    <CiFilter />
-                    Apply Filters
-                </button>
-            </div>
-            
-            <div>
-            <table className="table table-bordered">
-                <thead>
-                    <tr className="table-light">
-                        <th>Student Name</th>
-                        <th className="text-center">A1 SETUP <br /> Out of 100</th>
-                        <th className="text-center">A2 HTML  <br /> Out of 100</th>
-                        <th className="text-center">A3 CSS  <br /> Out of 100</th>
-                        <th className="text-center">A4 BOOTSTRAP  <br /> Out of 100</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr className="table-white"><td className="text-danger">Jane Adams</td>
-                        <td>100%</td><td>96.67%</td><td>92.18%</td><td>66.22%</td></tr>
-                    <tr className="table-light"><td className="text-danger">Christina Allen</td>
-                        <td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
-                    <tr className="table-white"><td className="text-danger">Samreen Ansari</td>
-                        <td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
-                    <tr className="table-light"><td className="text-danger">Han Bao</td>
-                        <td>100%</td><td>100%</td>
-
-                        <div className="d-flex">
-                            <input type="text" className="form-control" value="88.03%" />
-                            <span className="input-group-text">
-                                <TbFileImport />
-                            </span>
-                        </div>
-                        <td>98.99%</td></tr>
-                    <tr className="table-white"><td className="text-danger">Mahi Sai Srinivas Bobbili</td>
-                        <td>100%</td><td>96.67%</td><td>98.37%</td><td>100%</td></tr>
-                    <tr className="table-light"><td className="text-danger">Siran Cao</td>
-                        <td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
-                </tbody>
-            </table>
-            </div>
-
+          </div>
         </div>
-    );
+        <div className="col">
+          <div className="form-group">
+            <label htmlFor="wd-search-assignment" className="form-label">
+              Assignment Names
+            </label>
+            <div className="input-group">
+              <span className="input-group-text bg-white border-end-0">
+                <HiMagnifyingGlass />
+              </span>
+              <input
+                type="search"
+                className="form-control border-start-0"
+                id="wd-search-assignment"
+                placeholder="Search Assignments"
+              />
+              <IoIosArrowDown
+                className="position-absolute"
+                style={{ top: "50%", right: "20px", transform: "translateY(-50%)" }}
+                 />
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div>
+        <button className="btn btn-light btn-lg ms-2">
+          <CiFilter className="me-2 fs-6" />
+          Apply Filters
+        </button>
+      </div>
+      <br />
+      <div className="table-responsive">
+      <table className="table table-striped table-bordered">
+        <thead>
+          <tr className="table-light">
+            <th>Student Name</th>
+            {courseAssignments.map(assignment => (
+              <th key={assignment._id}>
+                {assignment.title}
+                <br />
+                Out of 100
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {students.map(student => (
+            <tr key={student._id}>
+              <td className="text-danger">{student.firstName} {student.lastName}</td>
+              {courseAssignments.map(assignment => {
+                const grade = db.grades.find(g => g.student === student._id && g.assignment === assignment._id);
+                return (
+                  <td key={assignment._id}>
+                    {grade ? `${grade.grade}` : 'N/A'}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  );
 }
